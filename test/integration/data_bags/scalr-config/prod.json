@@ -1,0 +1,21 @@
+{
+	"id": "production",
+	"enable_all": "false",
+  "endpoint": "172.31.26.205",
+	"mysql": [{
+		"server_id": "1",
+		"server_name": "172.31.25.100"
+	}, {
+		"server_id": "2",
+		"server_name": "172.31.30.50"
+	}],
+	"proxy": [{
+		"server_id": "1",
+		"server_name": "172.31.26.205"
+	}, {
+		"server_id": "2",
+		"server_name": "172.31.16.48"
+	}],
+  "worker": "172.31.26.11",
+  "influxdb": "172.31.27.94"
+}

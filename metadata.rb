@@ -18,3 +18,6 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/scalr-server'
+
+depends 'apt', '~> 6.1.4'
+depends 'chef-sugar'
