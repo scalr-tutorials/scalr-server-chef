@@ -7,7 +7,6 @@ installtype = if ubuntu?
               end
 execute "curl -L https://#{node['scalr-server']['repo_key']}:@packagecloud.io/install/repositories/scalr/scalr-server-ee/script.#{installtype}.sh | sudo bash"
 
-
 #
 # node['scalr-server']['packages'].each do |pkg|
 #   package pkg do
