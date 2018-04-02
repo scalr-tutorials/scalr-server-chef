@@ -1,21 +1,21 @@
 {
 	"id": "production",
 	"enable_all": "false",
-  "endpoint": "172.31.26.205",
+  "endpoint": "172.31.23.135",
 	"mysql": [{
 		"server_id": "1",
-		"server_name": "172.31.25.100"
+		"server_name": "172.31.24.138"
 	}, {
 		"server_id": "2",
-		"server_name": "172.31.30.50"
+		"server_name": "172.31.25.213"
 	}],
 	"proxy": [{
 		"server_id": "1",
-		"server_name": "172.31.26.205"
+		"server_name": "172.31.23.135"
 	}, {
 		"server_id": "2",
-		"server_name": "172.31.16.48"
+		"server_name": "172.31.21.216"
 	}],
-  "worker": "172.31.26.11",
-  "influxdb": "172.31.27.94"
+  "worker": "172.31.20.194",
+  "influxdb": "172.31.16.227"
 }

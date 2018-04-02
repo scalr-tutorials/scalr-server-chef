@@ -1,4 +1,5 @@
-# this needs to be broken down in Chef
+# include_recipe 'apt::default' if ubuntu?
+
 installtype = if ubuntu?
                 'deb'
               else
@@ -6,11 +7,7 @@ installtype = if ubuntu?
               end
 execute "curl -L https://#{node['scalr-server']['repo_key']}:@packagecloud.io/install/repositories/scalr/scalr-server-ee/script.#{installtype}.sh | sudo bash"
 
-package 'scalr-server' do
-  action :install
-end
 
-# include_recipe 'apt::default' if ubuntu?
 #
 # node['scalr-server']['packages'].each do |pkg|
 #   package pkg do

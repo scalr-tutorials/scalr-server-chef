@@ -14,30 +14,43 @@ include_recipe 'scalr-server::repository'
 
 package 'scalr-server' do
   action :install
+  version node['scalr-server']['version']
 end
 
+secrets_db = data_bag_item(node['scalr-server']['data_bag'], node['scalr-server']['secrets'])
 template "#{node['scalr-server']['folder']}/scalr-server-secrets.json" do
   source 'scalr-server-secrets.json.erb'
+  variables(
+    root_password: secrets_db['mysql']['root_password'],
+    scalr_mysql_password: secrets_db['mysql']['scalr_mysql_password'],
+    repl_password: secrets_db['mysql']['repl_password'],
+    memcached_password: secrets_db['memcached']['password'],
+    scalr_rabbitmq_password: secrets_db['rabbitmq']['scalr_password'],
+    scalr_influxdb_password: secrets_db['influxdb']['scalr_password'],
+    admin_password: secrets_db['app']['admin_password'],
+    secret_key: secrets_db['app']['secret_key'],
+    id: secrets_db['app']['id']
+  )
 end
 
-template "#{node['scalr-server']['folder']}/license.json" do
-  source 'license.json.erb'
+license_key = data_bag_item(node['scalr-server']['data_bag'], node['scalr-server']['license'])
+file "#{node['scalr-server']['folder']}/license.json" do
+  content license_key['license_file']
 end
 
+srv_db = data_bag_item(node['scalr-server']['data_bag'], node['scalr-server']['environment'])
 template "#{node['scalr-server']['folder']}/scalr-server.rb" do
   source 'scalr-server.rb.erb'
   variables(
-    enable_all: data_bag_item(node['scalr-server']['data_bag'], 'prod')['enable_all'],
-    endpoint: data_bag_item(node['scalr-server']['data_bag'], 'prod')['endpoint'],
-    master_mysql: data_bag_item(node['scalr-server']['data_bag'], 'prod')['mysql'][0]['server_name'],
-    slave_mysql: data_bag_item(node['scalr-server']['data_bag'], 'prod')['mysql'][1]['server_name'],
-    appservers1: data_bag_item(node['scalr-server']['data_bag'], 'prod')['proxy'][0]['server_name'],
-    appservers2: data_bag_item(node['scalr-server']['data_bag'], 'prod')['proxy'][1]['server_name'],
-    worker1: data_bag_item(node['scalr-server']['data_bag'], 'prod')['worker'],
-    influxdb: data_bag_item(node['scalr-server']['data_bag'], 'prod')['influxdb']
+    enable_all: srv_db['enable_all'],
+    endpoint: srv_db['endpoint'],
+    master_mysql: srv_db['mysql'][0]['server_name'],
+    slave_mysql: srv_db['mysql'][1]['server_name'],
+    appservers1: srv_db['proxy'][0]['server_name'],
+    appservers2: srv_db['proxy'][1]['server_name'],
+    worker1: srv_db['worker'],
+    influxdb: srv_db['influxdb']
   )
-  variables(
-           )
   notifies :run, 'execute[scalr-reconfigure]', :delayed
 end
 
