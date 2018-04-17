@@ -8,3 +8,7 @@ template "#{node['scalr-server']['folder']}/scalr-server-local.rb" do
   )
   notifies :run, 'execute[scalr-reconfigure]', :delayed
 end
+
+# execute 'setup mysql replications' do
+#   command '/opt/scalr-server/bin/kickstart-replication 172.31.21.164:3306 172.31.17.3:3306'
+# end

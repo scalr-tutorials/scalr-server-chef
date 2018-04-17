@@ -22,7 +22,7 @@ template "#{node['scalr-server']['folder']}/scalr-server-secrets.json" do
   source 'scalr-server-secrets.json.erb'
   variables(
     root_password: secrets_db['mysql']['root_password'],
-    scalr_mysql_password: secrets_db['mysql']['scalr_mysql_password'],
+    scalr_mysql_password: secrets_db['mysql']['scalr_password'],
     repl_password: secrets_db['mysql']['repl_password'],
     memcached_password: secrets_db['memcached']['password'],
     scalr_rabbitmq_password: secrets_db['rabbitmq']['scalr_password'],
