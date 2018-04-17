@@ -21,3 +21,4 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 
 depends 'apt', '~> 6.1.4'
 depends 'chef-sugar'
+depends 'packagecloud', '~> 1.0.0'

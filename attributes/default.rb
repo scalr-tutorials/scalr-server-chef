@@ -22,4 +22,5 @@ default['scalr-server']['secrets'] = 'scalr-secrets'
 default['scalr-server']['license'] = 'scalr-license'
 
 # scalr-server verions
-default['scalr-server']['version'] = '7.7.12.enterprise.xenial.b241-1'
+default['scalr-server']['version'] = '7.8.0.enterprise.xenial.b258-1'
+# 7.7.12.enterprise.xenial.b241-1'

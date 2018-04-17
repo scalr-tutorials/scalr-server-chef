@@ -10,7 +10,7 @@ mysql[:binlog] = true
 # Allow remote root access is required by the kickstart-replication script
 mysql[:allow_remote_root] = true
 
-<% if @mysql_id == 1 %>
+<% if @mysql_id == '1' %>
 # Specify which IP the slave will connect from to grant the correct privileges to the replication user
-mysql[:repl_allow_connections_from] = <%= @mysql_slave %>
+mysql[:repl_allow_connections_from] = "<%= @mysql_slave %>"
 <% end %>
