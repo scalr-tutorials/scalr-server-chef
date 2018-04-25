@@ -17,9 +17,50 @@ platforms:
   - name: centos-7
 
 suites:
-  - name: default
+  - name: influx
+    data_bags_path: "test/integration/data_bags"
     run_list:
-      - recipe[scalr-server::default]
+      - recipe[scalr-server::influxdb]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: mysql
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[scalr-server::mysql]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: proxy
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[scalr-server::proxy]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: proxy1
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[scalr-server::proxy]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: worker
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[scalr-server::worker]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: mysql2
+    data_bags_path: "test/integration/data_bags"
+    run_list:
+      - recipe[scalr-server::mysql_slave]
     verifier:
       inspec_tests:
         - test/smoke/default

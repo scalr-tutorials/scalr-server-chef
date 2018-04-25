@@ -9,7 +9,7 @@
 
 # Data bag setup
 
-There are 3 data bags that need to be setup.
+There are 3 data bags that need to be setup, examples below.
 
 # Environment - ex) prod
 this drives the layout of servers to feed the scalr.rb file
@@ -40,16 +40,20 @@ this drives the layout of servers to feed the scalr.rb file
 ```
 
 # Sclar - license
+
 Once you aquire your license file from Scalr run the following command to format it for a Data Bag
 ** ruby -e 'require "json"; puts File.read("<path-to-ec2-private-key>").to_json'
 ```json
 {
 	"id": "production",
-  "license_file": "{\n  \"id\": \"L-BB1ADE559ADC\",\n  \"version\": \"1.0\",\n 
+  "license_file": "{\n  \"id\": \"L-BB1ADE559ADC\",\n  \"version\": \"1.0\",\n
 }
 ```
 
 # Scalr - secrets
+
+Default name is 'scalr-secrets'
+
 This file can be gernated by running `scalr-server-ctl wizard`, the copied directly in
 
 ```json
@@ -81,6 +85,16 @@ This file can be gernated by running `scalr-server-ctl wizard`, the copied direc
     "ssl_key": null,
     "ssl_cert": null
   }
-  
+
   ```
 
+	# Testing
+
+	To test this cookbook you can utilize test-kitchen.  An example .kitchen.yml can be found in this cookbook
+
+	##setps to test:
+
+	- kitchen Create
+	  this will create all the instances and give you the IPaddress to setup your environment databag.
+	- update the environment data bag with the IPs from step 1.
+	- kitchen converge
