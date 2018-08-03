@@ -1,7 +1,7 @@
 ####################
  # External Routing #
 ####################
-<% if @enable_all == "true" %>
+<% if @enable_all == true %>
   enable_all <%= @enable_all %>
   ENDPOINT = '<%= @endpoint %>'
 <% else %>

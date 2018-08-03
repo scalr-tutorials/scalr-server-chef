@@ -15,7 +15,7 @@ bin/*
 # test kitchen
 .kitchen/
 .kitchen.local.yml
-.kitchen.ec2.yml
+# .kitchen.ec2.yml
 
 # Chef
 Berksfile.lock
@@ -23,4 +23,4 @@ Berksfile.lock
 Policyfile.lock.json
 
 # data bags
-test/integration/data_bags/scalr-config/scalr-*.json
+# test/integration/data_bags/scalr-config/scalr-*.json

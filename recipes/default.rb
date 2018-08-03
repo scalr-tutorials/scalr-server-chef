@@ -38,19 +38,22 @@ file "#{node['scalr-server']['folder']}/license.json" do
   content license_key['license_file']
 end
 
-srv_db = data_bag_item(node['scalr-server']['data_bag'], node['scalr-server']['environment'])
 template "#{node['scalr-server']['folder']}/scalr-server.rb" do
   source 'scalr-server.rb.erb'
-  variables(
-    enable_all: srv_db['enable_all'],
-    endpoint: srv_db['endpoint'],
-    master_mysql: srv_db['mysql'][0]['server_name'],
-    slave_mysql: srv_db['mysql'][1]['server_name'],
-    appservers1: srv_db['proxy'][0]['server_name'],
-    appservers2: srv_db['proxy'][1]['server_name'],
-    worker1: srv_db['worker'],
-    influxdb: srv_db['influxdb']
-  )
+  if node['scalr-server']['enable_all'] == true
+    variables(enable_all: node['scalr-server']['enable_all'],
+              endpoint: node['scalr-server']['endpoint'])
+  else
+    variables(enable_all: node['scalr-server']['enable_all'],
+              endpoint: node['scalr-server']['endpoint'],
+              master_mysql: node['scalr-server']['master_mysql'],
+              slave_mysql: node['scalr-server']['slave_mysql'],
+              appservers1: node['scalr-server']['appserver1'],
+              appservers2: node['scalr-server']['appserver2'],
+              worker1: node['scalr-server']['worker1'],
+              influxdb: node['scalr-server']['influxdb']
+             )
+  end
   notifies :run, 'execute[scalr-reconfigure]', :delayed
 end
 
