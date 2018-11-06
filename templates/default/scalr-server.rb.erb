@@ -1,9 +1,20 @@
 ####################
  # External Routing #
 ####################
-<% if @enable_all == "true" %>
+<% if @enable_all == true %>
   enable_all <%= @enable_all %>
   ENDPOINT = '<%= @endpoint %>'
+  proto = 'http'  # Set up the SSL settings and this to 'https' to use HTTPS
+
+  routing[:endpoint_scheme] = proto
+  routing[:endpoint_host] = ENDPOINT
+
+  routing[:graphics_scheme] = proto
+  routing[:graphics_host] = ENDPOINT
+
+  routing[:plotter_scheme] = proto
+  routing[:plotter_host] = ENDPOINT
+  routing[:plotter_port] = if proto == 'http' then 80 else 443 end
 <% else %>
 
   enable_all <%= @enable_all %>

@@ -13,13 +13,20 @@ default['scalr-server']['repo_key'] = 'xxx'
 # default scalr folder
 default['scalr-server']['folder'] = '/etc/scalr-server'
 
-# environment
-default['scalr-server']['environment'] = 'prod'
-
 # data_bag
 default['scalr-server']['data_bag'] = 'scalr-config'
 default['scalr-server']['secrets'] = 'scalr-secrets'
 default['scalr-server']['license'] = 'scalr-license'
 
 # scalr-server verions
-default['scalr-server']['version'] = '7.8.0.enterprise.xenial.b258-1'
+default['scalr-server']['version'] = '7.10.1.enterprise.xenial.b316-1'
+
+# scalr services
+default['scalr-server']['enable_all'] = true
+default['scalr-server']['endpoint'] = node['cloud']['public_ipv4_addrs']
+default['scalr-server']['master_mysql'] = ''
+default['scalr-server']['slave_mysql'] = ''
+default['scalr-server']['appserver1'] = ''
+default['scalr-server']['appserver2'] = ''
+default['scalr-server']['worker1'] = ''
+default['scalr-server']['influxdb'] = ''
