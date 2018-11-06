@@ -42,7 +42,7 @@ template "#{node['scalr-server']['folder']}/scalr-server.rb" do
   source 'scalr-server.rb.erb'
   if node['scalr-server']['enable_all'] == true
     variables(enable_all: node['scalr-server']['enable_all'],
-              endpoint: node['scalr-server']['endpoint'])
+              endpoint: node['scalr-server']['endpoint'][0])
   else
     variables(enable_all: node['scalr-server']['enable_all'],
               endpoint: node['scalr-server']['endpoint'],
